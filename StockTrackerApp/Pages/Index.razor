@@ -1,0 +1,59 @@
+﻿@page "/"
+
+<div class="row">
+    Type a ticker example : BAC, JPM and then click "Search"
+</div>
+ 
+<div class="row" style="padding-top:10px;">
+    <input class="form-control" @bind-value="symbol" style="width:200px; background-color:whitesmoke; border-color:black;" type="text" />
+    <button @onclick="OnSearchCallBack" style="width:100px;" class="btn btn-primary">Search</button>
+</div>
+
+<hr />
+
+<div>
+    @if (yahoofinances.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Symbol
+                    </th>
+                    <th>
+                        Yahoo Finance
+                    </th>
+                    <th>
+                        Tip Ranks
+                    </th>
+                    <th>
+                        Morning Star
+                    </th>
+                    <th>
+                        Stock Charts
+                    </th>
+                </tr>
+            </thead>
+            @for (var i = 0; i < symbols.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @symbols[i]
+                    </td>
+                    <td>
+                        <span><a href='@yahoofinances[i]' target="_blank">Link</a></span>
+                    </td>
+                    <td>
+                        <span><a href='@tipranks[i]' target="_blank">Link</a></span>
+                    </td>
+                    <td>
+                        <span><a href='@morningStars[i]' target="_blank">Link</a></span>
+                    </td>
+                    <td>
+                        <span><a href='@stockCharts[i]' target="_blank">Link</a></span>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
