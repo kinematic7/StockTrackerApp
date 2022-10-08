@@ -1,4 +1,5 @@
 Prerequisites :  
+---------------
 
 Get VS 2022 and .NET 6 or latest version of VS and .NET. 
 Ensure you have .net sdk installed
@@ -42,11 +43,82 @@ Create a docker file in the sln directory
 - Dockerfile is case sensitive
 - Also create .dockerignore
 ------------------------------------------------------------------------------------------------------------------------
-Copy the docker file into parent:
+
+Build and Run Application in Docker:
+-----------------------------------
+Copy the docker file into parent folder, same as sln file from proj file
 Then run ->
 docker build -t stocktrackerapp .
 docker run -d -p 8080:80 --name stocktracker stocktrackerapp
+------------------------------------------------------------------------------------------------------------------------
+
+PUSH and PULL to Docker Hub:
+-----------------------------
+
+Create an account in docker.com
+Create a repo, https://hub.docker.com/
+Go to Docker Desktop and see what the name of the image is, in our case it's stocktrackerapp:latest
+Go powershell:
+PS C:\Users\nezra\source\repos\StockTrackerApp> docker tag stocktrackerapp:latest nezraal/net6repo
+PS C:\Users\nezra\source\repos\StockTrackerApp> docker push nezraal/net6repo
+PS C:\Users\nezra\source\repos\StockTrackerApp> docker pull nezraal/net6repo:latest  
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Other useful commands
+---------------------
+
+PS C:\Users\nezra\source\repos\stocktrackerapp> docker start stocktracker
+stocktracker
+PS C:\Users\nezra\source\repos\stocktrackerapp> docker stop stocktracker
+stocktracker
+
+Note this is not the name of the image or the tag. This is the container name.
+If you go to docker desktop use the Container name column (not the image column)
+
+docker ps
+
+Gives a list of the images which are actively running on docker
+
+docker rename container-name new-name
+
+This will rename you container name.
 
 
 
+--------------------------------------------------------------------------------------------------------------------------
 
+docker exec
+
+Go inside docker shell:
+
+docker exec -it stocktracker sh
+This goes to the linux shell
+# exit
+This exits the shell
+
+
+Some usage example:
+# ls - gets a list of files and directory
+# cd <directory name> - goes inside a directory
+# cd .. go up in the directory
+# cat appsettings.Development.json - see what's in the jason file
+
+https://www.digitalocean.com/community/tutorials/how-to-use-docker-exec-to-run-commands-in-a-docker-container
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Only on a proper linux machine not in your local machine
+---------------------------------------------------------
+
+Curl command - curl means Client URL
+curl is used to transfer data over the network
+
+Now go to docker exec -it stocktracker sh
+
+# curl https://localhost:8080/
+
+This will see if a page the listener is working properly.
+
+
+         
