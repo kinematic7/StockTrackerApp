@@ -48,7 +48,7 @@ Build and Run Application in Docker:
 -----------------------------------
 Copy the docker file into parent folder, same as sln file from proj file
 Then run ->
-docker build -t stocktrackerapp .
+docker build -t stocktrackerapp .  (you can do something like stocktrackerapp:latest to give it a tag)
 docker run -d -p 8080:80 --name stocktracker stocktrackerapp
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -106,10 +106,8 @@ Some usage example:
 
 https://www.digitalocean.com/community/tutorials/how-to-use-docker-exec-to-run-commands-in-a-docker-container
 
---------------------------------------------------------------------------------------------------------------------------
 
-Only on a proper linux machine not in your local machine
----------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 
 Curl command - curl means Client URL
 curl is used to transfer data over the network
