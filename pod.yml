@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stocktracker-pod
+  labels:
+    app: stocktracker-web
+spec:
+  containers:
+  - name: stockertracker-ctr
+    image: nezraal/net6repo:latest
+    ports:
+    - containerPort: 8080

@@ -118,5 +118,56 @@ Now go to docker exec -it stocktracker sh
 
 This will see if a page the listener is working properly.
 
+=========================================================
+Kubernetes
+=========================================================
 
-         
+1. Install kubectl [Kubernetes Client to talk to Control Plane]
+	From windows powershell type -> scoop install kubectl
+2. Install Kuberntes Server
+	Docker > Settings > Kubernetes, Enable Kubernetes
+	After this you can install Azure, AWS. Google Cloud, etc.
+
+3. After this from powershell type the following to see if kubernetes nodes are running
+   	kubectl get nodes
+
+4. Type the following to get cluster information
+	kubectl cluster-info 
+
+5. Create a pod file and run the following command to create a pod
+	kubectl apply -f pod.yml    
+
+6. To see if it's up and running
+	kubectl get pods   
+ 	kubectl get pods -o wide [for more information]
+	kubectl describe pods stocktracker-pod [for debugging details]
+7. To delete
+	kubectl delete -f pod.yml 
+OR
+	kubectl delete pod <podname>
+
+EXPOSE IMPERATIVELY
+
+8.1 To expose a service to the web use
+	Use kubectl get pods to get the name of the pod, then execute
+	kubectl expose pod stocktracker-pod --type=LoadBalancer --name=stocktracker-web-svc
+9.1 To see if it's running type
+	kubectl get svc
+10.1 To delete a service use
+	kubectl delete svc stocktracker-web-svc
+
+EXPOSE DECLARITIVELY
+
+8.2 kubectl get pods --show-labels
+
+9.2
+    Use the label to create the service.yml
+10.2 Now run
+     kubectl apply -f service.yml
+
+11. To check if they are running correctly use
+
+kubectl get svc stocktracker-svc
+OR
+kubectl describe svc stocktracker-svc
+
