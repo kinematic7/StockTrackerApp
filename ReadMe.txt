@@ -142,6 +142,10 @@ Kubernetes
  	kubectl get pods -o wide [for more information]
 	kubectl describe pods stocktracker-pod [for debugging details]
 7. To delete
+	kubectl delete --all deployments
+	Deletes all deplyments
+
+OR  	Individual pod deployments:
 	kubectl delete -f pod.yml 
 OR
 	kubectl delete pod <podname>

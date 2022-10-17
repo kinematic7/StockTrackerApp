@@ -1,23 +1,16 @@
-kind: Service 
-apiVersion: v1 
+kind: Service
+apiVersion: v1
 metadata:
-  name: stocktracker-svc 
+  name: stocktracker-svc
 spec:
-  # Expose the service on a static port on each node
-  # so that we can access the service from outside the cluster 
-  type: LoadBalancer
-
-  # When the node receives a request on the static port (30163)
-  # "select pods with the label 'app' set to 'echo-hostname'"
-  # and forward the request to one of them
   selector:
-    app: stocktracker-web 
-
+    app.kubernetes.io/name: stocktrackerapp
   ports:
-    # Three types of ports for a service
-    # nodePort - a static port assigned on each the node
-    # port - port exposed internally in the cluster
-    # targetPort - the container port to send requests to
-    - nodePort: 31111
-      port: 80 
+    - protocol: "TCP"
+      # Port accessible inside cluster
+      port: 8081
+      # Port to forward to inside the pod
       targetPort: 8080
+      # Port accessible outside cluster
+      nodePort: 30000
+  type: LoadBalancer
